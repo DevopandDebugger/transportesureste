@@ -215,7 +215,7 @@ const cleanupListeners = () => {
 const listenClientRide = async (clientId) => {
   cleanupListeners();
   const ridesRef = collection(db, 'rides');
-  const q = query(ridesRef, where('clientId', '==', clientId), orderBy('createdAt', 'desc'));
+  const q = query(ridesRef, where('clientId', '==', clientId));
   rideListener = onSnapshot(q, (snapshot) => {
     const ride = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))[0];
     if (!ride) {
@@ -282,7 +282,7 @@ const renderAvailableRequests = (rides) => {
 
 const listenDriverRide = async (driverId) => {
   const ridesRef = collection(db, 'rides');
-  const q = query(ridesRef, where('driverId', '==', driverId), orderBy('createdAt', 'desc'));
+  const q = query(ridesRef, where('driverId', '==', driverId));
   rideListener = onSnapshot(q, (snapshot) => {
     const ride = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))[0];
     if (!ride) {
@@ -437,7 +437,7 @@ const createRideRequest = async () => {
 const subscribeAvailableRequests = () => {
   cleanupListeners();
   const ridesRef = collection(db, 'rides');
-  const q = query(ridesRef, where('status', '==', 'open'), orderBy('createdAt', 'desc'));
+  const q = query(ridesRef, where('status', '==', 'open'));
   availableListener = onSnapshot(q, (snapshot) => {
     const rides = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     renderAvailableRequests(rides);
