@@ -1,4 +1,4 @@
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.24.0/firebase-app.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js';
 import {
   getFirestore,
   collection,
@@ -14,7 +14,7 @@ import {
   onSnapshot,
   orderBy,
   serverTimestamp
-} from 'https://www.gstatic.com/firebasejs/9.24.0/firebase-firestore.js';
+} from 'https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBj3zHUSwSKOeNWP3lXawKBgmOagTfnAuc",
