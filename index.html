@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transporte Sureste</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-sA+e2X2wQpBAtBP+HB57QGd6QOLWVnY0v+v+4RClL7A=" crossorigin="" />
+</head>
+<body>
+  <main class="app-shell">
+    <section id="view-welcome" class="view active">
+      <h1>Bienvenido a Transporte Sureste</h1>
+      <p>Brindamos servicio de transporte público y privado, con clientes y choferes conectados en tiempo real.</p>
+      <div class="buttons">
+        <button id="btn-auth-start">Crear cuenta / Iniciar sesión</button>
+      </div>
+    </section>
+
+    <section id="view-auth-select" class="view">
+      <h2>Selecciona tu perfil</h2>
+      <div class="grid-card">
+        <button id="btn-register-client">Crear cuenta como Cliente</button>
+        <button id="btn-register-driver">Crear cuenta como Chofer</button>
+      </div>
+      <div class="grid-card">
+        <button id="btn-login-client">Iniciar sesión Cliente</button>
+        <button id="btn-login-driver">Iniciar sesión Chofer</button>
+      </div>
+      <button class="btn-secondary" id="btn-back-home">Volver</button>
+    </section>
+
+    <section id="view-register" class="view">
+      <h2 id="register-title">Crear cuenta</h2>
+      <form id="form-register">
+        <label>Teléfono<input type="tel" id="register-phone" required placeholder="934123456" pattern="[0-9]{8,15}" /></label>
+        <label>Contraseña<input type="password" id="register-password" required minlength="6" /></label>
+        <label>Edad<input type="number" id="register-age" required min="13" max="120" /></label>
+        <label>Foto de perfil URL<input type="url" id="register-photo" placeholder="https://..." /></label>
+        <input type="hidden" id="register-role" value="client" />
+        <button type="submit">Crear cuenta</button>
+      </form>
+      <button class="btn-secondary" id="btn-register-back">Regresar</button>
+    </section>
+
+    <section id="view-login" class="view">
+      <h2 id="login-title">Iniciar sesión</h2>
+      <form id="form-login">
+        <label>Teléfono<input type="tel" id="login-phone" required pattern="[0-9]{8,15}" /></label>
+        <label>Contraseña<input type="password" id="login-password" required minlength="6" /></label>
+        <input type="hidden" id="login-role" value="client" />
+        <button type="submit">Entrar</button>
+      </form>
+      <button id="btn-reset-password">Olvidé mi contraseña</button>
+      <button class="btn-secondary" id="btn-login-back">Regresar</button>
+    </section>
+
+    <section id="view-dashboard-client" class="view">
+      <div class="top-bar">
+        <div>
+          <h2>Buscar Transporte</h2>
+          <p id="client-welcome"></p>
+        </div>
+        <button id="btn-logout">Cerrar sesión</button>
+      </div>
+      <div class="card">
+        <button id="btn-search-ride">Buscar servicio</button>
+        <p class="muted">Presiona buscar para solicitar transporte y todos los choferes verán tu ubicación.</p>
+      </div>
+      <div id="client-request-status" class="card status-card"></div>
+      <div id="map-container-client" class="map-card hidden">
+        <h3>Ruta en tiempo real</h3>
+        <div id="map-client" class="map"></div>
+        <button id="btn-cancel-ride-client" class="btn-danger">Cancelar servicio</button>
+      </div>
+    </section>
+
+    <section id="view-dashboard-driver" class="view">
+      <div class="top-bar">
+        <div>
+          <h2>Buscar Clientes</h2>
+          <p id="driver-welcome"></p>
+        </div>
+        <button id="btn-logout-driver">Cerrar sesión</button>
+      </div>
+      <div class="card">
+        <button id="btn-start-search-driver">Buscar clientes disponibles</button>
+        <p class="muted">Los clientes se muestran automáticamente cuando solicitan transporte.</p>
+      </div>
+      <div id="driver-request-list" class="requests-grid"></div>
+      <div id="map-container-driver" class="map-card hidden">
+        <h3>Recorrido hacia el cliente</h3>
+        <div id="map-driver" class="map"></div>
+        <button id="btn-cancel-ride-driver" class="btn-danger">Cancelar servicio</button>
+      </div>
+    </section>
+
+    <section id="view-loading" class="view hidden">
+      <div class="spinner"></div>
+      <p>Cargando...</p>
+    </section>
+  </main>
+
+  <script type="module" src="app.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-o9N1j7kG4t1Hb0z+vrG4qVdZFhO4r6O3b7xA0oyN0+I=" crossorigin=""></script>
+</body>
+</html>
